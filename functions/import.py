@@ -10,3 +10,5 @@ import random
 import matplotlib.pyplot as plt
 from skimage import data, color
 from scipy.spatial import KDTree
+from skimage.data import camera, astronaut
+from skimage.feature import peak_local_max
