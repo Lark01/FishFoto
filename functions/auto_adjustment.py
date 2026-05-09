@@ -1,4 +1,11 @@
+import numpy as np
+from skimage import color
+
 def autoAdjustment(image, max_stretch=3.5, correction_strength=1.5):
+  # Ensure the input image is in a supported format
+  if image.dtype != np.uint8:
+    image = (image * 255).astype(np.uint8)
+
   # If image is RGBA
   if image.ndim == 4:
     image = color.rgba2rgb(image)
@@ -36,4 +43,4 @@ def autoAdjustment(image, max_stretch=3.5, correction_strength=1.5):
   lab_adjusted[:, :, 0] = l_adjusted
   adjusted_img = color.lab2rgb(lab_adjusted)
 
-  return adjusted_img
+  return (np.clip(adjusted_img, 0, 1) * 255).astype(np.uint8)
