@@ -1,18 +1,23 @@
+import numpy as np
+from skimage import color
+
 def saturation(image, saturation_value):
-  saturation_value += 1
+    multiplier = saturation_value + 1.0
 
-  # If image is RGBA
-  if image.ndim == 4:
-    image_rgb = color.rgba2rgb(image)
+    if image.dtype != np.uint8:
+        image = (np.clip(image, 0, 1) * 255).astype(np.uint8)
 
-  # If image is RGB
-  else:
-    image_rgb = image
+    # Handle Alpha channel if present
+    if image.ndim == 3 and image.shape[2] == 4:
+        image_rgb = color.rgba2rgb(image)
+    else:
+        image_rgb = image
 
-  image_hsv = color.rgb2hsv(image_rgb)
-  image_hsv[:, :, 1] *= np.clip(saturation_value, 0, 2)
+    # Process in HSV space
+    image_hsv = color.rgb2hsv(image_rgb)
+    image_hsv[:, :, 1] *= np.clip(multiplier, 0, 2)
 
-  result_image = color.hsv2rgb(image_hsv)
-  result_image = np.clip(result_image, 0, 1) # Prevents a range warning.
-
-  return result_image
+    result_image = color.hsv2rgb(image_hsv)
+    
+    # Return as uint8 for OpenCV compatibility
+    return (np.clip(result_image, 0, 1) * 255).astype(np.uint8)
