@@ -1,5 +1,4 @@
 def autoAdjustment(image, max_stretch=3.5, correction_strength=1.5):
-  # max_stretch=3.5, correction_strength=1.5 (just in case. Save this)
   # If image is RGBA
   if image.ndim == 4:
     image = color.rgba2rgb(image)
