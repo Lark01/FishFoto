@@ -1,3 +1,5 @@
+from PIL import Image
+
 def rotate_image(img_array, angle=0, maxrotate=360):
     #maximum or the num
     angle = max(0, min(angle, maxrotate))
