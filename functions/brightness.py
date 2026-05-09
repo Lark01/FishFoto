@@ -1,3 +1,5 @@
+import numpy as np
+
 def is_rgba(img):
     return img.ndim == 3 and img.shape[2] == 4
 #returns min and max depending on type no image data, so 1-255 but the highest is 185, this returns 255
@@ -24,6 +26,10 @@ def brightenimage(img, intensity=1, maxintensity=10, type="simple"):
     clip_min, clip_max = get_absolute_limits(img)
     fImg = img.astype(np.float32)
     
+    # Ensure the input image is in a supported format
+    if img.dtype != np.uint8:
+        img = (img * 255).astype(np.uint8)
+        
     if is_rgba(img):
         colors = fImg[:, :, :3]
         alpha = fImg[:, :, 3:]
