@@ -1,3 +1,7 @@
+from scipy.spatial import KDTree
+import numpy as np
+import cv2
+
 # kdtree used for algorithm to snap points to edges
 def build_edge_kdtree(image, low=100, high=200):
     edges = cv2.Canny(image, low, high)
