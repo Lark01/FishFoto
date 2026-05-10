@@ -497,8 +497,10 @@ class MainWindow(QMainWindow):
 
             # 2. Rotation Logic
             if self.active_rotation != 0:
+                math_angle = 90 if self.active_rotation == -90 else 270
+                
                 # rotate_image returns a PIL Image, so we must cast it back to a numpy array for OpenCV/display
-                rotated_pil = rotate_image(self.current_image_matrix, self.active_rotation)
+                rotated_pil = rotate_image(self.current_image_matrix, math_angle)
                 self.current_image_matrix = np.array(rotated_pil)
 
             # Update Display and close panel
