@@ -1,4 +1,3 @@
-
 import numpy as np
 import cv2
 from skimage.feature import peak_local_max
