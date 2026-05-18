@@ -35,16 +35,30 @@ The project separates the front-end logic from the mathematical image processing
 ### Core Files
 - main.py: The entry point. Handles the PySide6 event loop, connects GUI signals to processing functions, and manages the interactive graphics view (zooming, panning, dragging, and overlaying ruler graphics).
 - gui.py: The auto-generated (via Qt Designer/pyside6-uic) UI layout. It defines the canvas, buttons, sliders, and styling.
-### Processing Modules (/functions or root directory)
-- auto_adjustment.py: Uses LAB color space standard deviations to auto-correct contrast and tone limits.
-- brightness.py: Offers multi-algorithmic brightness adjustments (simple, log, exposure, power, exp) while managing absolute data limits.
-- contrast.py: Applies linear contrast stretching based on mean image intensity.
-- crop.py: A straightforward array-slicing function for precise image cropping.
-- median_filter.py: OpenCV wrapper for median blurring, excellent for isolated noise spikes.
-- band_reject.py: Performs FFT to apply a band-reject filter for specific noise frequencies based on a defined bandwidth and radius.
-- notch_filter.py: Performs FFT and peak local max detection to apply targeted notch masks on the frequency spectrum to eliminate structured noise.
-- resize.py: OpenCV wrapper for accurately scaling image dimensions.
-- rotation.py: Utilizes Pillow (PIL) to rotate images by a specified degree, automatically expanding the canvas boundary to ensure no corners are cropped.
-- saturation.py: Converts RGB/RGBA inputs into HSV color space using scikit-image, safely scaling the saturation channel before converting the array back for display.
-- sharpening.py: Acts as a bridge between OpenCV BGR arrays and PIL Image objects to apply an Unsharp Mask filter, enhancing object edges.
-- virtual_ruler_line.py: The core mathematics behind the line measuring tool. It uses OpenCV's Canny edge detection and SciPy's KDTree to intelligently "snap" user clicks to the nearest actual object edge, calculates a custom pixels-per-cm scale, and derives real-world distances.
+### Processing Modules
+- ```auto_adjustment.py```: Uses LAB color space standard deviations to auto-correct contrast and tone limits.
+- ```brightness.py```: Offers multi-algorithmic brightness adjustments (simple, log, exposure, power, exp) while managing absolute data limits.
+- ```contrast.py```: Applies linear contrast stretching based on mean image intensity.
+- ```crop.py```: A straightforward array-slicing function for precise image cropping.
+- ```median_filter.py```: OpenCV wrapper for median blurring, excellent for isolated noise spikes.
+- ```band_reject.py```: Performs FFT to apply a band-reject filter for specific noise frequencies based on a defined bandwidth and radius.
+- ```notch_filter.py```: Performs FFT and peak local max detection to apply targeted notch masks on the frequency spectrum to eliminate structured noise.
+- ```resize.py```: OpenCV wrapper for accurately scaling image dimensions.
+- ```rotation.py```: Utilizes Pillow (PIL) to rotate images by a specified degree, automatically expanding the canvas boundary to ensure no corners are cropped.
+- ```saturation.py```: Converts RGB/RGBA inputs into HSV color space using scikit-image, safely scaling the saturation channel before converting the array back for display.
+- ```sharpening.py```: Acts as a bridge between OpenCV BGR arrays and PIL Image objects to apply an Unsharp Mask filter, enhancing object edges.
+- ```virtual_ruler_line.py```: The core mathematics behind the line measuring tool. It uses OpenCV's Canny edge detection and SciPy's KDTree to intelligently "snap" user clicks to the nearest actual object edge, calculates a custom pixels-per-cm scale, and derives real-world distances.
+### Defunct Modules
+These modules were created for testing, or were not deemed necessary for our project.
+- ```contrast_stretching.py```
+- ```display_histogram```
+- ```fourier_display```
+- ```hist_eq```
+- ```laplacian.py```
+- ```mask_periodic_noise_remover.py```
+- ```periodic_noise.py```
+- ```saltandpepper_noise.py```
+- ```sobel.py```
+- ```translate.py```
+- ```virtual_ruler_curve.py```
+- ```zoom_in.py```
